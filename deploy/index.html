@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Livret d'Accueil — Entre lacs et montagnes</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+/* ============================================================
+   THÈME — modifiez les couleurs ici
+   ============================================================ */
+:root{
+  --bleu:#1352C8;
+  --bleu-fonce:#0E3A8C;
+  --beige:#EAE2D6;
+  --beige-clair:#F5F1EA;
+  --gris:#D9D9D9;
+  --texte:#1a2333;
+  --blanc:#ffffff;
+  --radius:24px;
+  --font:"Poppins","Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-script:"Snell Roundhand","Brush Script MT","Segoe Script",cursive;
+
+  /* Réglages d'espacement qui s'adaptent tout seuls à la largeur de l'écran.
+     clamp(mini, souple, maxi) = « jamais moins que mini, jamais plus que maxi ». */
+  --nav-h:64px;                              /* hauteur de la barre de navigation */
+  --pad-page:clamp(16px,4vw,20px);           /* marge gauche/droite des sections  */
+  --pad-section:clamp(40px,7vw,72px);        /* espace au-dessus/dessous          */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 10px)}
+body{margin:0;font-family:var(--font);color:var(--texte);background:var(--blanc);
+     line-height:1.6;font-size:16px;overflow-wrap:break-word}
+h1,h2,h3{margin:0;line-height:1.05;letter-spacing:-.02em;overflow-wrap:break-word}
+a{color:var(--bleu)}
+img{max-width:100%;height:auto;display:block}
+
+/* NAV ------------------------------------------------------------------
+   Grand écran  : logo + tous les liens sur une seule ligne.
+   Sous 1024 px : les liens sont cachés dans un menu déroulant (hamburger).
+   ---------------------------------------------------------------------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--beige)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:4px;padding:10px var(--pad-page)}
+.nav-logo{font-weight:800;color:var(--bleu);margin-right:10px;font-size:14.5px;line-height:1.2}
+.nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+nav a{padding:6px 10px;border-radius:99px;text-decoration:none;font-size:13px;font-weight:600;color:var(--texte);white-space:nowrap}
+nav a:hover{background:var(--beige)}
+
+/* Bouton hamburger (masqué sur grand écran) */
+.nav-burger{display:none;margin-left:auto;flex:0 0 auto;width:44px;height:44px;padding:0;border:0;
+  background:transparent;border-radius:12px;cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.nav-burger:hover{background:var(--beige)}
+.nav-burger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--bleu);transition:transform .2s,opacity .2s}
+.nav-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* HERO */
+header.hero{position:relative;background:var(--beige);overflow:hidden}
+.hero-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:0;align-items:stretch}
+.hero-img{min-height:420px;background-size:cover;background-position:center}
+.hero-txt{padding:clamp(32px,5vw,56px) clamp(20px,4vw,40px);display:flex;flex-direction:column;justify-content:center;background:var(--beige)}
+.hero-txt .kicker{font-family:var(--font-script);font-size:clamp(24px,5vw,34px);color:var(--bleu);line-height:1}
+.hero-txt h1{font-size:clamp(30px,7vw,64px);font-weight:800;color:var(--bleu);text-transform:uppercase;margin:6px 0 18px}
+.hero-adr{font-weight:700;color:var(--bleu-fonce);letter-spacing:.06em;font-size:clamp(12.5px,1.6vw,14px);text-transform:uppercase}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tag{background:var(--blanc);color:var(--bleu);border-radius:99px;padding:6px 14px;font-size:13px;font-weight:600}
+
+/* SECTIONS */
+section{max-width:1100px;margin:0 auto;padding:var(--pad-section) var(--pad-page)}
+section.alt{max-width:none;background:var(--beige-clair)}
+section.alt > .inner{max-width:1100px;margin:0 auto}
+.title{margin-bottom:clamp(20px,3vw,34px)}
+.title .script{font-family:var(--font-script);font-size:clamp(22px,3.6vw,30px);color:var(--bleu);line-height:.9;display:block}
+.title h2{font-size:clamp(26px,5vw,48px);font-weight:800;color:var(--bleu);text-transform:uppercase}
+
+/* CARTES */
+.grid{display:grid;gap:clamp(12px,2vw,18px)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--beige);border-radius:var(--radius);padding:clamp(18px,3vw,24px)}
+.card h3{color:var(--bleu);font-size:clamp(15px,2vw,17px);text-transform:uppercase;font-weight:800;margin-bottom:8px}
+.card p,.card li{font-size:14.5px}
+
+/* LISTE À SAVOIR */
+.row{display:grid;grid-template-columns:210px 1fr;gap:20px;align-items:start;padding:18px 0;border-bottom:2px solid var(--texte)}
+.row:first-child{border-top:2px solid var(--texte)}
+.row .lbl{display:flex;align-items:center;gap:10px;color:var(--bleu);font-weight:800;text-transform:uppercase;font-size:clamp(15px,2.2vw,17px)}
+.row .ico{font-size:22px;line-height:1;flex:0 0 auto}
+.row p{margin:0;font-size:14.5px}
+
+/* COMMODITÉS */
+.cmd{display:grid;grid-template-columns:230px 1fr;gap:0;align-items:center;background:var(--beige);border-radius:99px;padding:18px clamp(20px,3vw,28px);margin-bottom:16px}
+.cmd .left{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--bleu);text-transform:uppercase;font-size:clamp(15px,2.2vw,17px)}
+.cmd .right{border-left:2px solid var(--bleu-fonce);padding-left:22px;min-width:0}
+.cmd .right b{color:var(--bleu-fonce);text-transform:uppercase;font-size:14px;letter-spacing:.03em}
+.cmd .right .dist{font-style:italic;font-size:12px;text-transform:uppercase;color:var(--bleu);letter-spacing:.05em}
+.cmd .right p{margin:2px 0 0;font-size:14px}
+
+/* RÈGLES (les 6 cercles) */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,22px);justify-items:center}
+.rule{width:100%;background:var(--beige);border-radius:50%;aspect-ratio:1;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;text-align:center;padding:14% 16%}
+/* Les cercles font toujours au moins ~310 px de diametre (voir plus bas),
+   la taille du texte peut donc rester fixe : il tient toujours dedans. */
+.rule .num{font-size:32px;font-weight:800;color:var(--bleu);line-height:1}
+.rule .nm{font-size:12px;font-weight:800;text-transform:uppercase;color:var(--bleu-fonce);margin:6px 0 8px;letter-spacing:.04em}
+.rule p{margin:0;font-size:13.5px;line-height:1.45}
+
+/* WIFI — carte courte : une seule colonne, centrée */
+.wifi{background:var(--bleu);color:#fff;border-radius:var(--radius);padding:clamp(24px,4vw,40px);
+      display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(20px,3vw,30px)}
+.wifi h2{color:#fff}
+.wifi .title{margin-bottom:0}
+.wifi-txt{display:flex;flex-direction:column;gap:10px;max-width:60ch}
+.wifi-txt p{margin:0}
+.wifi-txt .intro{font-size:14.5px;opacity:.9}
+.wifi-txt .msg{font-size:clamp(15px,1.6vw,16.5px)}
+
+/* URGENCES — la grille s'adapte au nombre de numéros (3, 4, 5...) :
+   autant de colonnes que la largeur permet, chacune d'au moins 150 px. */
+.tel{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(10px,2vw,18px);margin-bottom:26px}
+.tel a{background:var(--beige);border-radius:120px;padding:clamp(16px,3vw,26px) 8px;text-align:center;text-decoration:none;display:block}
+.tel .n{font-size:clamp(26px,5.5vw,40px);font-weight:800;color:var(--bleu);line-height:1}
+.tel .w{font-weight:800;color:var(--bleu);text-transform:uppercase;font-size:clamp(11px,2.4vw,14px);margin-top:6px}
+
+/* CHECKLIST */
+.check{list-style:none;padding:0;margin:0}
+.check li{display:flex;gap:12px;align-items:flex-start;font-weight:700;color:var(--bleu);padding:12px 0;font-size:clamp(15px,2vw,16px)}
+.check li::before{content:"✓";display:inline-flex;align-items:center;justify-content:center;flex:0 0 26px;height:26px;border-radius:50%;background:var(--beige);color:var(--bleu);font-size:14px}
+
+/* TEXTES */
+.lead{font-size:clamp(15px,1.6vw,16.5px);max-width:62ch}
+.sub{font-family:var(--font-script);font-size:clamp(22px,3.4vw,28px);color:var(--bleu);margin:26px 0 4px;line-height:1}
+.note{background:var(--beige);border-radius:var(--radius);padding:clamp(20px,3vw,26px);font-style:italic;font-size:14.5px}
+.sign{font-family:var(--font-script);font-size:clamp(20px,3vw,26px);color:var(--bleu);margin-top:10px}
+.photo{border-radius:var(--radius);overflow:hidden;width:100%}
+.photo.round{border-radius:50%;aspect-ratio:1;object-fit:cover}
+ul.clean{padding-left:20px;margin:8px 0}
+ul.clean li{margin:3px 0;font-size:14.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.4vw,36px);align-items:center}
+.sticky-col{position:sticky;top:calc(var(--nav-h) + 24px)}
+footer{background:var(--bleu);color:#fff;text-align:center;padding:clamp(30px,5vw,44px) var(--pad-page);font-size:14px}
+footer > div{max-width:1100px;margin:0 auto;overflow-wrap:anywhere}
+footer a{color:#fff}
+
+/* ============================================================
+   ADAPTATION AUX ÉCRANS
+   Cinq paliers, du plus large au plus étroit :
+     ≤ 1139 px  portables étroits          → liens de nav plus compacts
+     ≤ 1023 px  tablettes (portrait+paysage) → menu hamburger, grilles 3→2
+     ≤  819 px  petites tablettes           → blocs sur 2 colonnes → 1
+     ≤  699 px  mobiles                     → tout sur 1 colonne
+     ≤  479 px  petits mobiles              → ajustements fins
+   ============================================================ */
+
+/* ---- ≤ 1139 px : la nav tient encore sur une ligne, en plus serré ---- */
+@media (max-width:1139.98px) and (min-width:1024px){
+  .nav-logo{font-size:13.5px;margin-right:8px}
+  nav a{padding:6px 8px;font-size:12.5px}
+}
+
+/* ---- ≤ 1023 px : TABLETTES — la nav devient un menu déroulant ---- */
+@media (max-width:1023.98px){
+  :root{--nav-h:60px}
+
+  .nav-inner{padding:8px var(--pad-page);flex-wrap:nowrap}
+  .nav-logo{margin-right:8px;min-width:0}
+  .nav-burger{display:flex}
+  .nav-links{
+    display:none;                      /* .open (ajouté par le bouton) le fait apparaître */
+    position:absolute;left:0;right:0;top:100%;
+    flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:2px;
+    padding:8px var(--pad-page) 14px;
+    background:var(--blanc);
+    border-bottom:1px solid var(--beige);
+    box-shadow:0 14px 26px rgba(0,0,0,.10);
+    max-height:min(70vh,520px);overflow-y:auto;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{
+    display:flex;align-items:center;
+    min-height:44px;                   /* zone tactile confortable */
+    padding:0 14px;border-radius:12px;font-size:15px;
+  }
+
+  /* Grilles : 3 colonnes → 2 */
+  .g3{grid-template-columns:repeat(2,1fr)}
+  /* Les cercles passent à 2 colonnes ; on limite la largeur du bloc pour
+     qu'ils gardent la même taille qu'en 3 colonnes sur grand écran. */
+  .rules{grid-template-columns:repeat(2,1fr);max-width:720px;margin-left:auto;margin-right:auto}
+  /* Libellés un peu moins larges */
+  .row{grid-template-columns:180px 1fr;gap:16px}
+  .cmd{grid-template-columns:180px 1fr}
+  .cmd .right{padding-left:18px}
+}
+
+/* ---- ≤ 819 px : les blocs à 2 colonnes passent sur 1 ---- */
+@media (max-width:819.98px){
+  .two{grid-template-columns:1fr}
+  .sticky-col{position:static}
+}
+
+/* ---- ≤ 699 px : MOBILE — tout sur une colonne ---- */
+@media (max-width:699.98px){
+  /* Hero : image au-dessus, en 16:9, puis le texte */
+  .hero-grid{grid-template-columns:1fr}
+  .hero-img{min-height:0;aspect-ratio:16/9}
+
+  /* Cartes : 1 colonne */
+  .g2,.g3{grid-template-columns:1fr}
+
+  /* Règles : 1 cercle par ligne, taille plafonnée pour rester lisible */
+  .rules{grid-template-columns:1fr;max-width:none}
+  .rule{width:min(100%,320px)}
+
+  /* « Bon à savoir » : le libellé passe AU-DESSUS du texte */
+  .row{grid-template-columns:1fr;gap:6px}
+
+  /* « À proximité » : la pilule devient une carte */
+  .cmd{grid-template-columns:1fr;border-radius:var(--radius);padding:18px 20px}
+  .cmd .right{border-left:0;border-top:2px solid var(--bleu-fonce);padding:12px 0 0;margin-top:10px}
+
+  /* Urgences : 2 colonnes bien nettes (4 numéros → 2 × 2) */
+  .tel{grid-template-columns:repeat(2,1fr);margin-bottom:20px}
+  .lead{max-width:none}
+}
+
+/* ---- ≤ 479 px : petits mobiles ---- */
+@media (max-width:479.98px){
+  .tag{padding:5px 11px;font-size:12px}
+  .hero-tags{gap:6px;margin-top:16px}
+  .note{padding:18px}
+  .check li{font-size:15px}
+}
+
+@media print{
+  nav{display:none}
+  section{padding:24px 0;page-break-inside:avoid}
+  .sticky-col{position:static}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo" id="navLogo"></span>
+    <button class="nav-burger" id="navBurger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks"></div>
+  </div>
+</nav>
+<div id="app"></div>
+
+<footer>
+  <div id="footer"></div>
+</footer>
+
+<script src="contenu.js"></script>
+<script>
+/* ==========================================================================
+   ⬇️  RENDU — pas besoin d'y toucher pour modifier le contenu.
+   ========================================================================== */
+
+const e = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+/* t() = comme e(), mais rend cliquables les numéros de téléphone français
+   et les adresses e-mail écrits en clair dans contenu.js.
+   À n'utiliser que pour du texte de corps, jamais dans un attribut HTML. */
+const t = s => e(s)
+  .replace(/\b0\d(?:[\s.]?\d{2}){4}\b/g, m => `<a href="tel:+33${m.replace(/[^0-9]/g,"").slice(1)}">${m}</a>`)
+  .replace(/\b[\w.+-]+@[\w-]+\.[\w.]+\b/g, m => `<a href="mailto:${m}">${m}</a>`);
+
+/* tel() = met un numéro français au format international, ex. "06 59 50 31 07" → "+33659503107" */
+const tel = n => "+33" + String(n).replace(/[^0-9]/g,"").slice(1);
+
+const SECTIONS = [
+  ["accueil","Bienvenue"],["chez-nous","Chez nous"],["a-savoir","À savoir"],["wifi","WiFi"],
+  ["commodites","À proximité"],["regles","Règles"],["activites","Visites"],["restaurants","Restaurants"],
+  ["urgences","Urgences"],["depart","Départ"]
+];
+
+window.addEventListener("DOMContentLoaded", () => {
+
+document.getElementById("navLogo").textContent = DATA.logement.maison;
+document.getElementById("navLinks").innerHTML =
+  SECTIONS.map(([id,l])=>`<a href="#${id}">${e(l)}</a>`).join("");
+
+/* --- Menu hamburger (petits écrans) — quelques lignes, sans librairie --- */
+const burger = document.getElementById("navBurger");
+const menu   = document.getElementById("navLinks");
+const setMenu = open => {
+  menu.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", open ? "true" : "false");
+  burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+};
+burger.addEventListener("click", () => setMenu(!menu.classList.contains("open")));
+menu.addEventListener("click", ev => { if (ev.target.closest("a")) setMenu(false); });
+document.addEventListener("keydown", ev => { if (ev.key === "Escape") setMenu(false); });
+window.addEventListener("resize", () => { if (window.innerWidth >= 1024) setMenu(false); });
+
+const D = DATA;
+document.getElementById("app").innerHTML = `
+
+<header class="hero" id="accueil">
+  <div class="hero-grid">
+    <div class="hero-img" style="background-image:url(${IMG.cuisine})"></div>
+    <div class="hero-txt">
+      <span class="kicker">Bienvenue</span>
+      <h1>${e(D.logement.titre)}</h1>
+      <div class="hero-adr">${e(D.logement.famille)}<br>${e(D.logement.adresse)}</div>
+      <div class="hero-tags">${D.logement.equipements.map(t=>`<span class="tag">${e(t)}</span>`).join("")}</div>
+    </div>
+  </div>
+</header>
+
+<section id="chez-nous">
+  <div class="title"><span class="script">Bienvenue</span><h2>Chez nous</h2></div>
+  <div class="two">
+    <img class="photo" src="${IMG.famille}" alt="La famille">
+    <div>
+      <p class="lead">${e(D.bienvenue.texte)}</p>
+      <div class="sign">${e(D.bienvenue.signature)}</div>
+      <div class="card" style="margin-top:22px">
+        <h3>Nous contacter</h3>
+        ${D.bienvenue.contacts.map(c=>`<p style="margin:2px 0"><b>${e(c.nom)}</b> — <a href="tel:${tel(c.tel)}">${e(c.tel)}</a></p>`).join("")}
+        <p style="margin:2px 0"><a href="mailto:${e(D.bienvenue.email)}">${e(D.bienvenue.email)}</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:26px">
+    <h3>Vous trouverez avec ce livret</h3>
+    <ul class="clean">${D.bienvenue.remis.map(t=>`<li>${e(t)}</li>`).join("")}</ul>
+  </div>
+</section>
+
+<section class="alt" id="a-savoir"><div class="inner">
+  <div class="title"><span class="script">Bon</span><h2>À savoir</h2></div>
+  ${D.aSavoir.map(r=>`<div class="row">
+      <div class="lbl"><span class="ico">${r.ico}</span>${e(r.titre)}</div>
+      <p>${t(r.texte)}</p>
+    </div>`).join("")}
+</div></section>
+
+<section id="wifi">
+  <div class="wifi">
+    <div class="title"><span class="script" style="color:#fff">Connexion</span><h2 style="color:#fff">WiFi</h2></div>
+    <div class="wifi-txt">
+      <p class="intro">Réseau disponible dans toute la maison.</p>
+      <p class="msg">${t(D.wifi.message)}</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="commodites"><div class="inner">
+  <div class="title"><span class="script">Commodités</span><h2>À proximité</h2></div>
+  ${D.commodites.map(c=>`<div class="cmd">
+      <div class="left"><span class="ico" style="font-size:24px">${c.ico}</span>${e(c.mode)}</div>
+      <div class="right">
+        <b>${e(c.lieu)}</b>
+        <div class="dist">Distance : ${e(c.dist)}</div>
+        <p>${t(c.texte)}</p>
+      </div>
+    </div>`).join("")}
+</div></section>
+
+<section id="regles">
+  <div class="title"><span class="script">Quelques</span><h2>Règles</h2></div>
+  <div class="rules">
+    ${D.regles.map((r,i)=>`<div class="rule">
+        <div class="num">${String(i+1).padStart(2,"0")}</div>
+        <div class="nm">${e(r.nom)}</div>
+        <p>${e(r.texte)}</p>
+      </div>`).join("")}
+  </div>
+  <div class="note" style="margin-top:32px">
+    <b style="font-style:normal;color:var(--bleu)">${e(D.messageEnfants.intro)}</b>
+    <p>« ${e(D.messageEnfants.texte)} »</p>
+    <div class="sign" style="font-style:normal">${e(D.messageEnfants.signature)}</div>
+  </div>
+</section>
+
+<section class="alt" id="activites"><div class="inner">
+  <div class="title"><span class="script">À faire, à voir</span><h2>Visites &amp; activités</h2></div>
+  <div class="two" style="align-items:start">
+    <div>
+      ${D.activites.map(b=>`
+        <div class="sub">${e(b.titre)}</div>
+        ${b.paragraphes.map(p=>`<p class="lead">${t(p)}</p>`).join("")}
+        ${b.listes.map(l=>`<div class="card" style="background:#fff;margin:14px 0">
+            <h3>${e(l.titre)}</h3>
+            <ul class="clean">${l.items.map(i=>`<li>${t(i)}</li>`).join("")}</ul>
+          </div>`).join("")}
+      `).join("")}
+    </div>
+    <div class="sticky-col">
+      <img class="photo" src="${IMG.montagne}" alt="Montagne">
+      <img class="photo" src="${IMG.paysage}" alt="Paysage" style="margin-top:18px">
+    </div>
+  </div>
+</div></section>
+
+<section id="restaurants">
+  <div class="title"><span class="script">À proximité…</span><h2>Restaurants</h2></div>
+  ${D.restaurants.map(z=>`
+    <div class="sub">${e(z.zone)}</div>
+    <div class="grid g2" style="margin-top:10px;margin-bottom:22px">
+      ${z.items.map(r=>`<div class="card"><h3>${e(r.nom)}</h3><p>${t(r.texte)}</p></div>`).join("")}
+    </div>`).join("")}
+</section>
+
+<section class="alt" id="urgences"><div class="inner">
+  <div class="title"><span class="script">Numéros</span><h2>Urgences</h2></div>
+  <div class="tel">
+    ${D.urgences.numeros.map(u=>`<a href="tel:${u.n}"><div class="n">${e(u.n)}</div><div class="w">${e(u.w)}</div></a>`).join("")}
+  </div>
+  <div class="grid g3">
+    ${D.urgences.lieux.map(l=>`<div class="card" style="background:#fff">
+        <h3>${e(l.nom)}</h3><p>${t(l.detail)}</p>
+        ${l.tel?`<p><a href="tel:${tel(l.tel)}"><b>${e(l.tel)}</b></a></p>`:""}
+      </div>`).join("")}
+  </div>
+</div></section>
+
+<section id="depart">
+  <div class="two">
+    <div>
+      <div class="title"><span class="script">Avant de</span><h2>Partir</h2></div>
+      <ul class="check">${D.avantDePartir.map(t=>`<li>${e(t)}</li>`).join("")}</ul>
+    </div>
+    <div>
+      <div class="title"><span class="script">À bientôt</span><h2>Merci !</h2></div>
+      <p class="lead">${e(D.merci)}</p>
+      <div class="sign">${e(D.bienvenue.signature)}</div>
+    </div>
+  </div>
+</section>
+`;
+
+document.getElementById("footer").innerHTML =
+  `<b>${e(D.logement.maison)}</b> — ${e(D.logement.adresse)}<br>` +
+  D.bienvenue.contacts.map(c=>`${e(c.nom)} : <a href="tel:${tel(c.tel)}">${e(c.tel)}</a>`).join(" &nbsp;•&nbsp; ") +
+  ` &nbsp;•&nbsp; <a href="mailto:${e(D.bienvenue.email)}">${e(D.bienvenue.email)}</a>`;
+
+});
+</script>
+
+</body>
+</html>
