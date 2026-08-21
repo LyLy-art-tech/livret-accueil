@@ -34,7 +34,7 @@ const DATA = {
   },
 
   wifi: {
-    message: "Le nom du réseau et son mot de passe vous sont communiqués à votre demande, et restent affichés sur un petit papier dans l'entrée. Si la connexion fait des siennes, appelez-nous, on règle ça tout de suite ;-)"
+    message: "Le nom du réseau et son mot de passe vous sont communiqués à votre demande, et restent affichés sur un post-it sur la table du salon. Si la connexion fait des siennes, appelez-nous, on règle ça tout de suite ;-)"
   },
 
   aSavoir: [
